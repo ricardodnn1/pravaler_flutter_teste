@@ -1,6 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pravaler_flutter_teste/app/games/presenter/details/controller/game_details_controller.dart';
+import 'package:pravaler_flutter_teste/shared/utils/extension.dart';
 import 'package:provider/provider.dart';
 
 class GameDetailsPage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _GameDetailsPageState extends State<GameDetailsPage> {
                 const SizedBox(height: 15),
                 Text("Desenvolvido: ${controller.gameSingle.developer}", softWrap: true, maxLines: 30, style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
                 const SizedBox(height: 15),
-                Text("Lançamento: ${controller.gameSingle.releaseDate!}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
+                Text("Lançamento: ${controller.gameSingle.releaseDate!.parseStringToDateBr()}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
                 const SizedBox(height: 15),
                 Text("Requisitos minimus:", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 15),

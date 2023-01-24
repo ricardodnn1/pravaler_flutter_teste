@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:pravaler_flutter_teste/app/games/presenter/games/controller/game_controller.dart';
+import 'package:pravaler_flutter_teste/shared/utils/extension.dart';
 import 'package:provider/provider.dart';
 
 class ListGamesPage extends StatelessWidget {
@@ -97,7 +98,7 @@ class ListGamesPage extends StatelessWidget {
                                 const SizedBox(height: 5),
                                 Text(e.platform!, style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
                                 const SizedBox(height: 5),
-                                Text("Lançamento: ${e.releaseDate}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400))
+                                Text("Lançamento: ${e.releaseDate!.parseStringToDateBr()}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400))
                               ],
                             ),
                           )
