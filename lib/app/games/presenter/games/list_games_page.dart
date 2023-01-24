@@ -1,4 +1,10 @@
-﻿import 'package:flutter/material.dart';
+﻿import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_listview/infinite_listview.dart';
+import 'package:pravaler_flutter_teste/app/games/presenter/games/controller/game_controller.dart';
+import 'package:provider/provider.dart';
 
 class ListGamesPage extends StatelessWidget {
   const ListGamesPage({super.key});
@@ -6,21 +12,96 @@ class ListGamesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var controller = context.watch<GameController>();
 
     return Scaffold(
-      appBar: AppBar(),
-      body: SizedBox(
-        width: size.width,
-        height: size.height,
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-                
-            ],
-          ),
+      appBar: AppBar(
+        title: const Text("Free To Game List"),
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Container(
+              height: 40,
+              width: size.width, 
+              margin: const EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                  border: Border.all(width: .5, color: Colors.blueAccent) 
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: size.width * .15,
+                    child: IconButton(
+                      onPressed: () async { 
+                        controller.getSearchGames();
+                      }, icon: const Icon(Icons.search))),
+                  Container(
+                    color: Colors.transparent,
+                    width: size.width * .75,
+                    child: TextFormField(    
+                      controller: controller.textSearch,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        border: InputBorder.none, 
+                        hintText: 'Buscar por titulo, descrição, publicação..',
+                        hintStyle: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                        contentPadding: const EdgeInsets.only(bottom: 5, top: 0)
+                      ), 
+                      onEditingComplete: () {
+                        controller.getSearchGames();
+                      }, 
+                    ),
+                  ),
+                ],
+              ),
+            ), 
+            controller.gamesList.isEmpty ? const Center(child: CircularProgressIndicator()) : Expanded(
+              child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: controller.gamesList.length <= 10 ? 10 : controller.gamesList.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed('/games/details', arguments: { 'id': controller.gamesList[index].id  }),
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.network(controller.gamesList[index].thumbnail!, width: 120),
+                        Container(
+                          height: 75,
+                          padding: const EdgeInsets.only(left: 8), 
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(controller.gamesList[index].title!, style: GoogleFonts.poppins(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w600)),
+                              const SizedBox(height: 5),
+                              Text(controller.gamesList[index].platform!, style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
+                              const SizedBox(height: 5),
+                              Text("Lançamento: ${controller.gamesList[index].releaseDate}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ],
         ),
       ),
+      
     );
-  }
+  } 
 }
