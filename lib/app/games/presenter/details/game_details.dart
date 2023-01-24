@@ -20,7 +20,7 @@ class _GameDetailsPageState extends State<GameDetailsPage> {
     controller.getGameById(widget.id);
     var size = MediaQuery.of(context).size;
 
-    return Scaffold(
+    return controller.gameSingle.title == null ? const Center(child: CircularProgressIndicator()) :  Scaffold(
       appBar: AppBar(
         title: Text(controller.gameSingle.title!),
       ),
@@ -35,7 +35,7 @@ class _GameDetailsPageState extends State<GameDetailsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.network(controller.gameSingle.thumbnail!),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(controller.gameSingle.title!, style: GoogleFonts.poppins(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 5),
                 Text("Plataforma: ${controller.gameSingle.platform!}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
@@ -70,7 +70,7 @@ class _GameDetailsPageState extends State<GameDetailsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                   ...controller.gameSingle.screenshots!.map((e) => Image.network(e.image!, width: 120))
+                   ...controller.gameSingle.screenshots!.map((e) => Image.network(e.image!, width: size.width / 3.2))
                   ],
                 )
               ],

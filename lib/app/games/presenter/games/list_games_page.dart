@@ -17,6 +17,14 @@ class ListGamesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Free To Game List"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.changeOrderList();
+            },
+            icon: Icon(Icons.wysiwyg_rounded),
+          )
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -64,44 +72,42 @@ class ListGamesPage extends StatelessWidget {
               ),
             ), 
             controller.gamesList.isEmpty ? const Center(child: CircularProgressIndicator()) : Expanded(
-              child: ListView.builder(
+              child: ListView(
               shrinkWrap: true,
-              itemCount: controller.gamesList.length <= 10 ? 10 : controller.gamesList.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                onTap: () => Navigator.of(context).pushNamed('/games/details', arguments: { 'id': controller.gamesList[index].id  }),
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.network(controller.gamesList[index].thumbnail!, width: 120),
-                        Container(
-                          height: 75,
-                          padding: const EdgeInsets.only(left: 8), 
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(controller.gamesList[index].title!, style: GoogleFonts.poppins(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w600)),
-                              const SizedBox(height: 5),
-                              Text(controller.gamesList[index].platform!, style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
-                              const SizedBox(height: 5),
-                              Text("Lançamento: ${controller.gamesList[index].releaseDate}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400))
-                            ],
-                          ),
-                        )
-                      ],
+              children: [
+                ...controller.gamesList.map((e) => 
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pushNamed('/games/details', arguments: { 'id': e.id  }),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.network(e.thumbnail!, width: 120),
+                          Container(
+                            height: 75,
+                            padding: const EdgeInsets.only(left: 8), 
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(e.title!, style: GoogleFonts.poppins(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w600)),
+                                const SizedBox(height: 5),
+                                Text(e.platform!, style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400)),
+                                const SizedBox(height: 5),
+                                Text("Lançamento: ${e.releaseDate}", style: GoogleFonts.poppins(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }),
-            ),
-          ],
+                  ))
+                ]),
+              ),
+          ]),
         ),
-      ),
-      
     );
   } 
 }
