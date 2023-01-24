@@ -23,6 +23,7 @@ class _GameDetailsPageState extends State<GameDetailsPage> {
     return controller.gameSingle.title == null ? const Center(child: CircularProgressIndicator()) :  Scaffold(
       appBar: AppBar(
         title: Text(controller.gameSingle.title!),
+        backgroundColor: const Color(0xFF272b30),
       ),
       body: SizedBox(
         width: double.infinity,

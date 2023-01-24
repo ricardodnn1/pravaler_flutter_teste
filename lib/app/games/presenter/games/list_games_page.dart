@@ -17,12 +17,13 @@ class ListGamesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Free To Game List"),
+        backgroundColor: const Color(0xFF272b30),
         actions: [
           IconButton(
             onPressed: () {
               controller.changeOrderList();
             },
-            icon: Icon(Icons.wysiwyg_rounded),
+            icon: const Icon(Icons.sort_by_alpha),
           )
         ],
       ),
@@ -39,7 +40,7 @@ class ListGamesPage extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
-                  border: Border.all(width: .5, color: Colors.blueAccent) 
+                  border: Border.all(width: .5, color: const Color(0xFFAAAAAA)) 
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -54,13 +55,13 @@ class ListGamesPage extends StatelessWidget {
                   Container(
                     color: Colors.transparent,
                     width: size.width * .75,
-                    child: TextFormField(    
+                    child: TextField(    
                       controller: controller.textSearch,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         border: InputBorder.none, 
                         hintText: 'Buscar por titulo, descrição, publicação..',
-                        hintStyle: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                        hintStyle: GoogleFonts.poppins(fontSize: 14, color: const Color(0xFFAAAAAA)),
                         contentPadding: const EdgeInsets.only(bottom: 5, top: 0)
                       ), 
                       onEditingComplete: () {

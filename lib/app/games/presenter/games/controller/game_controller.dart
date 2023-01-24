@@ -34,6 +34,9 @@ class GameController extends ChangeNotifier {
     changeOrderList() {
       gamesList.sort((a, b) => a.title!.compareTo(b.title!));
       orderByAsc = !orderByAsc;
+      if(orderByAsc == false) {
+        getAllGames();
+      }
       notifyListeners();
     }
 
