@@ -19,7 +19,7 @@
 - Abra o terminal do VS Code, execute o camando: flutter build apk --release
 - Apos executar o comando navegue pela pasta build/app/flutter-apk/release.
 
-## Gerencia de estado utilizada no projeto e design pattern:
+## Gerencia de estado e padrão de projeto:
 
 - Provider, ChangeNotifier e NotifyListeners para notificar os widgets.
-- MVC
+- MVC e Repository pattern.
