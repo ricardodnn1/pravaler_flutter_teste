@@ -1,16 +1,20 @@
-# pravaler_flutter_teste
+# Teste para desenvolvedor mobile Flutter - Pravaler
 
-A new Flutter project.
 
-## Getting Started
+## Pré-requisitos para rodar o projeto: 
+- JDK 8 (Java Developer Kit 8).
+- SDK Android 12.0
+- Flutter versão 3.3.10
+- VS Code versão 1.74.3
 
-This project is a starting point for a Flutter application.
+## Instruções para rodar o código fonte: 
 
-A few resources to get you started if this is your first Flutter project:
+- Abra o projeto com Visual Studio Code ou Android Studio.
+- No canto inferior do VS Code clique em "No Device" selecione o emulador que deseja executar o projeto.
+- Abra o terminal e execute o comando Flutter run com emulador aberto, verifique se "No Device" foi substituido pelo nome do emulador.
+ 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Instruções para gerar um APK do projeto: 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Abra o terminal do VS Code, execute o camando: flutter build apk --release
+- Apos executar o comando navegue pela pasta build/app/flutter-apk/release.
